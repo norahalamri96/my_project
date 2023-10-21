@@ -550,7 +550,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               }
                               DateTime currentDate = DateTime.now();
                               if (DateTime.parse(value).isBefore(currentDate)) {
-                                return 'تاريخ الانتهاء يجب أن يكون في المستقبل';
+                                return ' يجب أن يكون في المستقبل';
                               }
 
                               return null;
