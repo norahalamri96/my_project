@@ -525,7 +525,11 @@ class _PaymentPageState extends State<PaymentPage> {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'رجاء ادخل رقم البطاقة';
-                        } else if (value.length != 16) {
+                        }
+                        else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+                          return 'رجاء ادخل أرقام فقط';
+                        }
+                        else if (value.length != 16) {
                           return 'رقم البطاقة يجب أن يتكون من 16 رقمًا';
                         }
                         return null;
@@ -572,7 +576,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               if (value!.isEmpty) {
                                 return 'رجاء ادخل CVV';
                               } else if (value.length != 3) {
-                                return 'رقم CVV يجب أن يتكون من 3 رقمًا';
+                                return 'يجب أن يتكون من 3 رقمًا';
                               }
                               return null;
                             },
