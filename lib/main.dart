@@ -541,15 +541,21 @@ class _PaymentPageState extends State<PaymentPage> {
                             decoration: InputDecoration(
                               labelText: 'ادخل تاريخ الانتهاء',
                               border: OutlineInputBorder(),
-                              hintText: '20/23',
+                              hintText: 'YYYY-MM-DD',
                             ),
                             keyboardType: TextInputType.datetime,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return 'رجاء ادخل تاربخ الانتهاء';
+                                return 'رجاء ادخل تاريخ الانتهاء';
                               }
+                              DateTime currentDate = DateTime.now();
+                              if (DateTime.parse(value).isBefore(currentDate)) {
+                                return 'تاريخ الانتهاء يجب أن يكون في المستقبل';
+                              }
+
                               return null;
                             },
+
                           ),
                         ),
                         SizedBox(width: 16.0),
@@ -589,7 +595,10 @@ class _PaymentPageState extends State<PaymentPage> {
                             keyboardType: TextInputType.name,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return 'رجاء ادخل رقم البطاقة';
+                                return 'رجاء ادخل اسم حامل البطاقة';
+                              }
+                              if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(value)) {
+                                return 'رجاء ادخل حروف فقط';
                               }
                               return null;
                             },
